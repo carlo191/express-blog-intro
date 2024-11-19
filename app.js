@@ -1,46 +1,55 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.send("Server del mio blog");
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`In ascolto su port  ${port}`);
 });
 
+// array di ogetti
 const posts = [
   {
     titolo: "Ciambellone",
     contenuto: "ciambellone",
-    immagine: "publicciambellone.jpeg",
+    immagine: "ciambellone.jpeg",
     tags: ["Ciambellone", "ciambella", "grande"],
   },
   {
     titolo: "Cracker Barbabietola",
     contenuto: "Cracker Barbabietola",
-    immagine: "publiccracker_barbabietola.jpeg",
+    immagine: "cracker_barbabietola.jpeg",
     tags: ["cracker", "barbabietola"],
   },
   {
     titolo: "Pane Fritto Dolce",
     contenuto: "Pane Fritto Dolce",
-    immagine: "publicpane_fritto_dolce.jpeg",
+    immagine: "pane_fritto_dolce.jpeg",
     tags: ["pane", "fritto", "dolce"],
   },
   {
     titolo: "Pasta Barbabietola",
     contenuto: "Pasta Barbabietola",
-    immagine: "publicpasta_barbabietola.jpeg",
+    immagine: "pasta_barbabietola.jpeg",
     tags: ["pasta", "barbabietola"],
   },
   {
     titolo: "Torta Paesana",
     contenuto: "Torta Paesana",
-    immagine: "public\torta_paesana.jpeg",
+    immagine: "torta_paesana.jpeg",
     tags: ["torta", "paesana"],
   },
 ];
+// rotta /bacheca
+app.get("/bacheca", (req, res) => {
+  const response = {
+    conteggio: posts.length,
+    post: posts,
+  };
 
-console.log(posts);
+  res.json(response);
+});
